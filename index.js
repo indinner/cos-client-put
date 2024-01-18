@@ -1,5 +1,19 @@
-import {COS} from "./src/cos/cos.sdk.js";
+import COS from "cos-js-sdk-v5";
+
+
+
 const cos={
+
+    /**
+     * 文件上传
+     * @param id 腾讯云访问密钥ID
+     * @param key 腾讯云访问密钥Key
+     * @param file file文件对象、字符串、二进制数据
+     * @param path 文件路径，格式参考: /path/ 、注意: ⚠️请不要使用根目录⚠️
+     * @param name 文件名，格式参考: name
+     * @param type 文件后缀，格式参考: png 注意: ⚠️后缀不需要带"点" ⚠️
+     * @returns {Promise<unknown>} 返回一个promise对象
+     */
     putFile(id,key,file,path,name,type){
         let cosClient=this.initCos(id,key)
         return new Promise(function (resolve, reject) {
@@ -12,8 +26,7 @@ const cos={
                 onProgress: function(progressData) {
                 }
             }, function(err, data) {
-                console.log(err,data)
-                data.Location=data.Location.replace('ak-1302363069.cos.ap-shanghai.myqcloud.com','cdn.youngcode.net')
+                data.Location=data.Location.replace("iai-1311740348.cos.ap-nanjing.myqcloud.com",'cdn.youngcode.net')
                 resolve(data)
                 reject(err)
             });
